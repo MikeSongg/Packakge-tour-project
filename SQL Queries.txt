@@ -1,0 +1,32 @@
+- Insert:
+    Insert Into Customer Values ('$CusID', '$Name', '$Email');
+
+- Delete:
+    Delete from TravelAgency where TAID = '$TAID';
+
+- Update:
+    Update TravelAgency set Address = '$Address' where TAID = '$TAID'";
+
+- Selection:
+    select PTID, PTLocation, PTPrice, TAID, ResID FROM Manage_PackageTour1 WHERE PTPrice > 100";
+
+- Projection:
+    select Name AS Agency_Name, TAID AS Agency_ID from  TravelAgency;
+
+- Join:
+    select t.Name AS Agency_Name, t.TAID AS Agency_ID, p.PTLocation AS Location, p.PTPrice AS Price 
+    from Manage_PackageTour1 p, TravelAgency t where p.TAID = '$TAID';
+
+- Aggregation:
+    - select MAX(p.PTPrice) as price from Manage_PackageTour1 p;
+    - select MIN(p.PTPrice) as price from Manage_PackageTour1 p;
+    - select AVG(p.PTPrice) as price from Manage_PackageTour1 p;
+
+- Nested Aggregation:
+    select PTLocation, avg(PTPrice) as average_price from Manage_PackageTour1 group by PTLocation;
+
+- Division:
+    - select CusID As Customer from Customer c where NOT EXISTS (Select * from Customer_Service cs
+    where NOT EXISTS (Select ccs.CusID from CallCS ccs where ccs.CusID = c.CusID AND cs.CSID = ccs.CSID));
+    - select Name As Customer from Customer c where NOT EXISTS (Select * from Customer_Service cs
+    where NOT EXISTS (Select ccs.CusID from CallCS ccs where ccs.CusID = c.CusID AND cs.CSID = ccs.CSID));
